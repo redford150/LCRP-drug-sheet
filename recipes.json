@@ -23,8 +23,7 @@
     "label": "Mushrooms",
     "ingredients": [
       { "name": "Pcilocybin (20g)", "perBatch": 1 },
-      { "name": "Baggies", "perBatch": 1 },
-      { "name": "Red/Green/Blue Chems", "perBatch": 1 }
+      { "name": "Red/Green/Blue Chems", "perBatch": 2 }
     ]
   }
 }
