@@ -10,9 +10,12 @@
 <body>
   <main class="shell">
     <header>
-      <div>
+      <div class="site-brand">
+        <img class="site-logo" src="pfp.jpg" alt="Lucid City RP logo">
+        <div>
         <div class="kicker">Lucid City RP / External Tool</div>
         <h1>Seed<br>Chart.</h1>
+        </div>
       </div>
       <p class="intro">Made by Charlie Brown - UID 474</p>
     </header>
@@ -93,11 +96,12 @@
     };
     const renderConnections = () => {
       connectionSvg.innerHTML = '<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#12609a"></path></marker></defs>';
+      const nodeHeight = 64;
       state.edges.forEach(edge => {
         const from = nodeById(edge.from); const to = nodeById(edge.to);
         if (!from || !to) return;
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        const startX = from.layoutX + 85; const startY = from.layoutY + 84;
+        const startX = from.layoutX + 85; const startY = from.layoutY + nodeHeight;
         const endX = to.layoutX + 85; const endY = to.layoutY;
         const midY = startY + (endY - startY) / 2;
         line.setAttribute('x1', startX); line.setAttribute('y1', startY);
