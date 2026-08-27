@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#081a36">
-  <title>Lucid City RP | Strain Map</title>
+  <title>Lucid City RP | Seed Chart</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,12 +12,12 @@
     <header>
       <div>
         <div class="kicker">Lucid City RP / External Tool</div>
-        <h1>Strain<br>map.</h1>
+        <h1>Seed<br>Chart.</h1>
       </div>
       <p class="intro">Made by Charlie Brown - UID 474</p>
     </header>
 
-    <section class="diagram-container" id="diagram" aria-label="Static strain map">
+    <section class="diagram-container" id="diagram" aria-label="Static seed chart">
       <svg id="connections" aria-hidden="true"></svg>
       <div class="empty-flow" id="empty-flow"></div>
     </section>
@@ -30,15 +30,49 @@
     let state = { nodes: [], edges: [] };
 
     const nodeById = id => state.nodes.find(node => node.id === id);
+    const childrenOf = id => state.edges.filter(edge => edge.from === id).map(edge => nodeById(edge.to)).filter(Boolean);
+    const layoutTree = () => {
+      const roots = state.nodes.filter(node => !state.edges.some(edge => edge.to === node.id));
+      const levels = new Map();
+      const leaves = [];
+      const visit = (node, level) => {
+        levels.set(node.id, Math.max(levels.get(node.id) || 0, level));
+        const children = childrenOf(node.id);
+        if (!children.length) leaves.push(node.id);
+        children.forEach(child => visit(child, level + 1));
+      };
+      roots.forEach(root => visit(root, 0));
+      state.nodes.filter(node => !levels.has(node.id)).forEach(node => visit(node, 0));
+      const leafGap = 205;
+      const positions = new Map(leaves.map((id, index) => [id, { x: 20 + index * leafGap, y: levels.get(id) * 125 + 28 }]));
+      const positionNode = node => {
+        const children = childrenOf(node.id);
+        if (!children.length) return positions.get(node.id);
+        const childPositions = children.map(positionNode);
+        const x = childPositions.reduce((sum, position) => sum + position.x, 0) / childPositions.length;
+        const position = { x, y: levels.get(node.id) * 125 + 28 };
+        positions.set(node.id, position);
+        return position;
+      };
+      roots.forEach(positionNode);
+      state.nodes.forEach(node => {
+        const position = positions.get(node.id) || { x: 20, y: 28 };
+        node.layoutX = position.x;
+        node.layoutY = position.y;
+      });
+      const maxLevel = Math.max(0, ...levels.values());
+      diagram.style.height = `${Math.max(490, (maxLevel + 1) * 125 + 80)}px`;
+    };
     const render = () => {
+      layoutTree();
       diagram.querySelectorAll('.diagram-box').forEach(node => node.remove());
       document.querySelector('#empty-flow').hidden = state.nodes.length > 0;
       state.nodes.forEach(node => {
         const element = document.createElement('article');
         element.className = 'diagram-box';
         element.dataset.id = node.id;
-        element.style.left = `${node.x}px`;
-        element.style.top = `${node.y}px`;
+        element.style.left = `${node.layoutX}px`;
+        element.style.top = `${node.layoutY}px`;
         const title = document.createElement('strong');
         title.textContent = node.name;
         const type = document.createElement('small');
@@ -54,8 +88,22 @@
         const from = nodeById(edge.from); const to = nodeById(edge.to);
         if (!from || !to) return;
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', from.x + 85); line.setAttribute('y1', from.y + 42);
-        line.setAttribute('x2', to.x + 85); line.setAttribute('y2', to.y + 42);
+        const startX = from.layoutX + 85; const startY = from.layoutY + 84;
+        const endX = to.layoutX + 85; const endY = to.layoutY;
+        const midY = startY + (endY - startY) / 2;
+        line.setAttribute('x1', startX); line.setAttribute('y1', startY);
+        line.setAttribute('x2', endX); line.setAttribute('y2', endY);
+        line.setAttribute('x1', startX); line.setAttribute('y1', midY);
+        line.setAttribute('x2', endX); line.setAttribute('y2', midY);
+        line.setAttribute('x1', startX); line.setAttribute('y1', startY);
+        line.setAttribute('x2', startX); line.setAttribute('y2', midY);
+        const horizontal = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        horizontal.setAttribute('x1', startX); horizontal.setAttribute('y1', midY);
+        horizontal.setAttribute('x2', endX); horizontal.setAttribute('y2', midY);
+        horizontal.setAttribute('stroke', '#12609a'); horizontal.setAttribute('stroke-width', '2');
+        connectionSvg.append(horizontal);
+        line.setAttribute('x1', endX); line.setAttribute('y1', midY);
+        line.setAttribute('x2', endX); line.setAttribute('y2', endY);
         line.setAttribute('stroke', '#12609a'); line.setAttribute('stroke-width', '2'); line.setAttribute('marker-end', 'url(#arrow)');
         connectionSvg.append(line);
       });
