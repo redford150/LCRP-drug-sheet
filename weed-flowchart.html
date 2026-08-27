@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#081a36">
-  <title>Lucid City RP | Strain Flowchart</title>
+  <title>Lucid City RP | Strain Map</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,32 +12,30 @@
     <header>
       <div>
         <div class="kicker">Lucid City RP / External Tool</div>
-        <h1>Strain<br>flowchart.</h1>
+        <h1>Strain<br>map.</h1>
       </div>
-      <p class="intro">View the fictional roleplay strain map maintained by the server backend.</p>
+      <p class="intro">Made by Charlie Brown - UID 474</p>
     </header>
 
-    <section class="flowchart" id="flowchart" aria-label="Strain flowchart">
+    <section class="diagram-container" id="diagram" aria-label="Static strain map">
       <svg id="connections" aria-hidden="true"></svg>
-      <div class="empty-flow" id="empty-flow">Loading strain map...</div>
+      <div class="empty-flow" id="empty-flow"></div>
     </section>
-    <p class="flow-note">Read-only view. Strain names, positions, and connections are controlled by the backend data.</p>
     <p><a class="tool-link" href="index.html">Back to batch calculator</a></p>
-    <footer>External calculator for roleplay use.</footer>
   </main>
 
   <script>
-    const flowchart = document.querySelector('#flowchart');
+    const diagram = document.querySelector('#diagram');
     const connectionSvg = document.querySelector('#connections');
     let state = { nodes: [], edges: [] };
 
     const nodeById = id => state.nodes.find(node => node.id === id);
     const render = () => {
-      flowchart.querySelectorAll('.flow-node').forEach(node => node.remove());
+      diagram.querySelectorAll('.diagram-box').forEach(node => node.remove());
       document.querySelector('#empty-flow').hidden = state.nodes.length > 0;
       state.nodes.forEach(node => {
         const element = document.createElement('article');
-        element.className = 'flow-node';
+        element.className = 'diagram-box';
         element.dataset.id = node.id;
         element.style.left = `${node.x}px`;
         element.style.top = `${node.y}px`;
@@ -46,7 +44,7 @@
         const type = document.createElement('small');
         type.textContent = 'Backend managed';
         element.append(title, type);
-        flowchart.append(element);
+        diagram.append(element);
       });
       renderConnections();
     };
