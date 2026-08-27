@@ -70,6 +70,16 @@ footer { padding: 0 0 34px; color: #e2f3ff; font: 12px/1.5 Arial, sans-serif; te
 .diagram-box { position: absolute; width: 170px; padding: 14px; border: 1px solid #8db7d6; border-radius: 6px; color: var(--ink); background: #fff; box-shadow: 0 8px 20px rgba(10, 47, 86, .14); }
 .diagram-box strong { display: block; overflow-wrap: anywhere; font: 700 16px Georgia, serif; }
 .diagram-box small { display: block; margin-top: 5px; color: var(--muted); font: 10px Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.result-box { border-width: 2px; }
+.result-lemon { border-color: #bd941b; background: #f7dc68; color: #302702; }
+.result-emerald { border-color: #287c54; background: #8bd3a9; color: #103d28; }
+.result-ruby { border-color: #a62f3b; background: #f0808c; color: #4a1018; }
+.result-frosty { border-color: #6fa9d2; background: #c5e5f8; color: #163b58; }
+.result-grape { border-color: #81539e; background: #c9a7dc; color: #32133f; }
+.result-midnight-diesel { border-color: #173b72; background: #315d9e; color: #fff; }
+.result-romance { border-color: #ba507b; background: #f1a8c5; color: #50152e; }
+.result-crimson { border-color: #76232d; background: #a83e49; color: #fff; }
+.result-box small { color: inherit; opacity: .78; }
 .node-remove { position: absolute; top: 7px; right: 8px; padding: 0; color: var(--muted); background: transparent; font-size: 16px; line-height: 1; }
 .node-remove:hover { color: #a33b42; }
 .empty-flow { position: absolute; inset: 0; display: grid; place-items: center; padding: 30px; color: var(--muted); font: 14px/1.5 Arial, sans-serif; text-align: center; }

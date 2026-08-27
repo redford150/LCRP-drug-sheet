@@ -31,6 +31,18 @@
 
     const nodeById = id => state.nodes.find(node => node.id === id);
     const childrenOf = id => state.edges.filter(edge => edge.from === id).map(edge => nodeById(edge.to)).filter(Boolean);
+    const resultClass = name => {
+      const normalized = name.toLowerCase();
+      if (normalized.includes('midnight diesel')) return 'result-midnight-diesel';
+      if (normalized.includes('lemon')) return 'result-lemon';
+      if (normalized.includes('emerald')) return 'result-emerald';
+      if (normalized.includes('ruby')) return 'result-ruby';
+      if (normalized.includes('frost')) return 'result-frosty';
+      if (normalized.includes('grape')) return 'result-grape';
+      if (normalized.includes('romance')) return 'result-romance';
+      if (normalized.includes('crimson')) return 'result-crimson';
+      return '';
+    };
     const layoutTree = () => {
       const roots = state.nodes.filter(node => !state.edges.some(edge => edge.to === node.id));
       const nodeWidth = 170;
@@ -64,6 +76,11 @@
       state.nodes.forEach(node => {
         const element = document.createElement('article');
         element.className = 'diagram-box';
+        if (state.edges.some(edge => edge.to === node.id)) {
+          element.classList.add('result-box');
+          const colorClass = resultClass(node.name);
+          if (colorClass) element.classList.add(colorClass);
+        }
         element.dataset.id = node.id;
         element.style.left = `${node.layoutX}px`;
         element.style.top = `${node.layoutY}px`;

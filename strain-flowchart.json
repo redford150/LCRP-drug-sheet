@@ -23,7 +23,7 @@
     { "id": "rule-11", "name": "Romance + Grape", "x": 0, "y": 0 },
     { "id": "result-11", "name": "Grape", "x": 0, "y": 0 },
     { "id": "rule-12", "name": "Frost + Ruby", "x": 0, "y": 0 },
-    { "id": "result-12", "name": "Romance 3x rep", "x": 0, "y": 0 },
+    { "id": "result-12", "name": "Romance", "x": 0, "y": 0 },
     { "id": "rule-13", "name": "Frost + Grape", "x": 0, "y": 0 },
     { "id": "result-13", "name": "frosty", "x": 0, "y": 0 },
     { "id": "rule-14", "name": "Blue dream + Grape", "x": 0, "y": 0 },
