@@ -1,0 +1,31 @@
+{
+  "coke": {
+    "label": "Coke",
+    "ingredients": [
+      { "name": "HCL (Acid)", "perBatch": 1 },
+      { "name": "Twostroke", "perBatch": 1 },
+      { "name": "Baggies", "perBatch": 1 },
+      { "name": "Cement", "perBatch": 1 },
+      { "name": "Leaves", "perBatch": 1 }
+    ]
+  },
+  "meth": {
+    "label": "Meth",
+    "ingredients": [
+      { "name": "Pills", "perBatch": 1 },
+      { "name": "Ammonia", "perBatch": 1 },
+      { "name": "Acetone", "perBatch": 1 },
+      { "name": "Ethanol", "perBatch": 1 },
+      { "name": "Baggies", "perBatch": 1 },
+      { "name": "Lithium", "perBatch": 1 }
+    ]
+  },
+  "mushrooms": {
+    "label": "Mushrooms",
+    "ingredients": [
+      { "name": "Pcilocybin (20g)", "perBatch": 1 },
+      { "name": "Baggies", "perBatch": 1 },
+      { "name": "Red/Green/Blue Chems", "perBatch": 1 }
+    ]
+  }
+}
