@@ -1,0 +1,11 @@
+{
+  "nodes": [
+    { "id": "strain-1", "name": "Strain 01 (placeholder)", "x": 36, "y": 70 },
+    { "id": "strain-2", "name": "Strain 02 (placeholder)", "x": 300, "y": 210 },
+    { "id": "strain-3", "name": "Strain 03 (placeholder)", "x": 564, "y": 70 }
+  ],
+  "edges": [
+    { "from": "strain-1", "to": "strain-2" },
+    { "from": "strain-2", "to": "strain-3" }
+  ]
+}

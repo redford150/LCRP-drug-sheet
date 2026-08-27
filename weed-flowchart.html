@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081a36">
+  <title>Lucid City RP | Strain Flowchart</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <div class="kicker">Lucid City RP / External Tool</div>
+        <h1>Strain<br>flowchart.</h1>
+      </div>
+      <p class="intro">View the fictional roleplay strain map maintained by the server backend.</p>
+    </header>
+
+    <section class="flowchart" id="flowchart" aria-label="Strain flowchart">
+      <svg id="connections" aria-hidden="true"></svg>
+      <div class="empty-flow" id="empty-flow">Loading strain map...</div>
+    </section>
+    <p class="flow-note">Read-only view. Strain names, positions, and connections are controlled by the backend data.</p>
+    <p><a class="tool-link" href="index.html">Back to batch calculator</a></p>
+    <footer>External calculator for roleplay use.</footer>
+  </main>
+
+  <script>
+    const flowchart = document.querySelector('#flowchart');
+    const connectionSvg = document.querySelector('#connections');
+    let state = { nodes: [], edges: [] };
+
+    const nodeById = id => state.nodes.find(node => node.id === id);
+    const render = () => {
+      flowchart.querySelectorAll('.flow-node').forEach(node => node.remove());
+      document.querySelector('#empty-flow').hidden = state.nodes.length > 0;
+      state.nodes.forEach(node => {
+        const element = document.createElement('article');
+        element.className = 'flow-node';
+        element.dataset.id = node.id;
+        element.style.left = `${node.x}px`;
+        element.style.top = `${node.y}px`;
+        const title = document.createElement('strong');
+        title.textContent = node.name;
+        const type = document.createElement('small');
+        type.textContent = 'Backend managed';
+        element.append(title, type);
+        flowchart.append(element);
+      });
+      renderConnections();
+    };
+    const renderConnections = () => {
+      connectionSvg.innerHTML = '<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#12609a"></path></marker></defs>';
+      state.edges.forEach(edge => {
+        const from = nodeById(edge.from); const to = nodeById(edge.to);
+        if (!from || !to) return;
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', from.x + 85); line.setAttribute('y1', from.y + 42);
+        line.setAttribute('x2', to.x + 85); line.setAttribute('y2', to.y + 42);
+        line.setAttribute('stroke', '#12609a'); line.setAttribute('stroke-width', '2'); line.setAttribute('marker-end', 'url(#arrow)');
+        connectionSvg.append(line);
+      });
+    };
+    window.addEventListener('resize', renderConnections);
+    fetch('strain-flowchart.json')
+      .then(response => {
+        if (!response.ok) throw new Error('Strain map could not be loaded.');
+        return response.json();
+      })
+      .then(data => { state = data; render(); })
+      .catch(() => { document.querySelector('#empty-flow').textContent = 'Strain map unavailable.'; });
+  </script>
+</body>
+</html>
