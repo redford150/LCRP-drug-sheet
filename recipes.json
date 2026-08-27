@@ -2,11 +2,11 @@
   "coke": {
     "label": "Coke",
     "ingredients": [
-      { "name": "HCL (Acid)", "perBatch": 1 },
-      { "name": "Twostroke", "perBatch": 1 },
-      { "name": "Baggies", "perBatch": 1 },
+      { "name": "HCL (Acid)", "perBatch": 5 },
+      { "name": "Twostroke", "perBatch": 2 },
+      { "name": "Baggies", "perBatch": 15 },
       { "name": "Cement", "perBatch": 1 },
-      { "name": "Leaves", "perBatch": 1 }
+      { "name": "Leaves", "perBatch": 50 }
     ]
   },
   "meth": {
@@ -16,8 +16,7 @@
       { "name": "Ammonia", "perBatch": 1 },
       { "name": "Acetone", "perBatch": 1 },
       { "name": "Ethanol", "perBatch": 1 },
-      { "name": "Baggies", "perBatch": 1 },
-      { "name": "Lithium", "perBatch": 1 }
+      { "name": "Lithium", "perBatch": 3 }
     ]
   },
   "mushrooms": {
