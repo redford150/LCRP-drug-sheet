@@ -21,7 +21,7 @@
       <svg id="connections" aria-hidden="true"></svg>
       <div class="empty-flow" id="empty-flow"></div>
     </section>
-    <p><a class="tool-link" href="index.html">Back to batch calculator</a></p>
+    <p><a class="tool-link filled-link" href="index.html">Back to batch calculator</a></p>
   </main>
 
   <script>
@@ -33,35 +33,20 @@
     const childrenOf = id => state.edges.filter(edge => edge.from === id).map(edge => nodeById(edge.to)).filter(Boolean);
     const layoutTree = () => {
       const roots = state.nodes.filter(node => !state.edges.some(edge => edge.to === node.id));
-      const levels = new Map();
-      const leaves = [];
-      const visit = (node, level) => {
-        levels.set(node.id, Math.max(levels.get(node.id) || 0, level));
-        const children = childrenOf(node.id);
-        if (!children.length) leaves.push(node.id);
-        children.forEach(child => visit(child, level + 1));
+      const columnX = Math.max(20, (diagram.clientWidth - 170) / 2);
+      let cursorY = 28;
+      const positionSubtree = node => {
+        node.layoutX = columnX;
+        node.layoutY = cursorY;
+        cursorY += 110;
+        childrenOf(node.id).forEach(positionSubtree);
+        cursorY += 35;
       };
-      roots.forEach(root => visit(root, 0));
-      state.nodes.filter(node => !levels.has(node.id)).forEach(node => visit(node, 0));
-      const leafGap = 205;
-      const positions = new Map(leaves.map((id, index) => [id, { x: 20 + index * leafGap, y: levels.get(id) * 125 + 28 }]));
-      const positionNode = node => {
-        const children = childrenOf(node.id);
-        if (!children.length) return positions.get(node.id);
-        const childPositions = children.map(positionNode);
-        const x = childPositions.reduce((sum, position) => sum + position.x, 0) / childPositions.length;
-        const position = { x, y: levels.get(node.id) * 125 + 28 };
-        positions.set(node.id, position);
-        return position;
-      };
-      roots.forEach(positionNode);
-      state.nodes.forEach(node => {
-        const position = positions.get(node.id) || { x: 20, y: 28 };
-        node.layoutX = position.x;
-        node.layoutY = position.y;
+      roots.forEach(positionSubtree);
+      state.nodes.filter(node => !roots.includes(node)).forEach(node => {
+        if (!node.layoutY) positionSubtree(node);
       });
-      const maxLevel = Math.max(0, ...levels.values());
-      diagram.style.height = `${Math.max(490, (maxLevel + 1) * 125 + 80)}px`;
+      diagram.style.height = `${Math.max(490, cursorY + 20)}px`;
     };
     const render = () => {
       layoutTree();

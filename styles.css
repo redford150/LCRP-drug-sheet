@@ -41,6 +41,8 @@ button { border: 0; border-radius: 5px; cursor: pointer; font: 700 12px Arial, s
 .summary-actions { display: flex; align-items: center; gap: 10px; }
 .tool-link { padding: 11px 15px; border: 1px solid var(--green); border-radius: 5px; color: var(--green); background: transparent; font: 700 12px Arial, sans-serif; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
 .tool-link:hover { color: #fff; background: var(--green); }
+.filled-link { display: inline-block; color: #fff; background: var(--green); }
+.filled-link:hover { background: #0b4d7f; }
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding-bottom: 52px; }
 .recipe { overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--card); box-shadow: var(--shadow); animation: rise .55s both; }
 .recipe:nth-child(2) { animation-delay: .08s; } .recipe:nth-child(3) { animation-delay: .16s; }
@@ -63,7 +65,7 @@ footer { padding: 0 0 34px; color: #e2f3ff; font: 12px/1.5 Arial, sans-serif; te
 .flow-toolbar input { width: 100%; }
 .flow-button { padding: 12px 15px; color: #fff; background: var(--green); }
 .flow-button.secondary { color: var(--green); background: var(--mint); }
-.diagram-container { position: relative; min-height: 490px; overflow: auto; border: 1px solid rgba(255,255,255,.55); border-radius: 8px; background: rgba(235, 247, 255, .88); box-shadow: var(--shadow); }
+.diagram-container { position: relative; min-height: 490px; overflow-x: hidden; overflow-y: auto; border: 1px solid rgba(255,255,255,.55); border-radius: 8px; background: rgba(235, 247, 255, .88); box-shadow: var(--shadow); }
 .diagram-container svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .diagram-box { position: absolute; width: 170px; padding: 14px; border: 1px solid #8db7d6; border-radius: 6px; color: var(--ink); background: #fff; box-shadow: 0 8px 20px rgba(10, 47, 86, .14); }
 .diagram-box strong { display: block; overflow-wrap: anywhere; font: 700 16px Georgia, serif; }
