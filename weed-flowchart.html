@@ -33,20 +33,29 @@
     const childrenOf = id => state.edges.filter(edge => edge.from === id).map(edge => nodeById(edge.to)).filter(Boolean);
     const layoutTree = () => {
       const roots = state.nodes.filter(node => !state.edges.some(edge => edge.to === node.id));
-      const columnX = Math.max(20, (diagram.clientWidth - 170) / 2);
-      let cursorY = 28;
-      const positionSubtree = node => {
-        node.layoutX = columnX;
-        node.layoutY = cursorY;
-        cursorY += 110;
-        childrenOf(node.id).forEach(positionSubtree);
-        cursorY += 35;
+      const nodeWidth = 170;
+      const columnGap = 35;
+      const rowGap = 70;
+      const columns = Math.max(1, Math.floor((diagram.clientWidth - 40 + columnGap) / (nodeWidth + columnGap)));
+      const branchHeight = node => {
+        const children = childrenOf(node.id);
+        return children.length ? 115 + Math.max(...children.map(branchHeight)) : 85;
       };
-      roots.forEach(positionSubtree);
-      state.nodes.filter(node => !roots.includes(node)).forEach(node => {
-        if (!node.layoutY) positionSubtree(node);
+      roots.forEach((root, index) => {
+        const column = index % columns;
+        const row = Math.floor(index / columns);
+        const columnX = 20 + column * (nodeWidth + columnGap);
+        const rowY = 28 + row * (Math.max(...roots.slice(row * columns, (row + 1) * columns).map(branchHeight)) + rowGap);
+        const positionSubtree = (node, depth) => {
+          node.layoutX = columnX;
+          node.layoutY = rowY + depth * 115;
+          childrenOf(node.id).forEach(child => positionSubtree(child, depth + 1));
+        };
+        positionSubtree(root, 0);
       });
-      diagram.style.height = `${Math.max(490, cursorY + 20)}px`;
+      const rowCount = Math.ceil(roots.length / columns);
+      const rowHeight = roots.length ? Math.max(...roots.map(branchHeight)) + rowGap : 0;
+      diagram.style.height = `${Math.max(490, 28 + rowCount * rowHeight + 20)}px`;
     };
     const render = () => {
       layoutTree();
@@ -93,7 +102,7 @@
         connectionSvg.append(line);
       });
     };
-    window.addEventListener('resize', renderConnections);
+    window.addEventListener('resize', render);
     fetch('strain-flowchart.json')
       .then(response => {
         if (!response.ok) throw new Error('Strain map could not be loaded.');
