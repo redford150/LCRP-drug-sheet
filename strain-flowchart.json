@@ -1,11 +1,48 @@
 {
   "nodes": [
-    { "id": "strain-1", "name": "Strain 01 (placeholder)", "x": 36, "y": 70 },
-    { "id": "strain-2", "name": "Strain 02 (placeholder)", "x": 300, "y": 210 },
-    { "id": "strain-3", "name": "Strain 03 (placeholder)", "x": 564, "y": 70 }
+    { "id": "rule-01", "name": "OG + Ruby", "x": 0, "y": 0 },
+    { "id": "result-01", "name": "Ruby", "x": 0, "y": 0 },
+    { "id": "rule-02", "name": "OG + Frosty", "x": 0, "y": 0 },
+    { "id": "result-02", "name": "Frost", "x": 0, "y": 0 },
+    { "id": "rule-03", "name": "OG + Crimson", "x": 0, "y": 0 },
+    { "id": "result-03", "name": "Lemon", "x": 0, "y": 0 },
+    { "id": "rule-04", "name": "OG + Grape", "x": 0, "y": 0 },
+    { "id": "result-04", "name": "Grape", "x": 0, "y": 0 },
+    { "id": "rule-05", "name": "Crimson + Ruby", "x": 0, "y": 0 },
+    { "id": "result-05", "name": "Ruby", "x": 0, "y": 0 },
+    { "id": "rule-06", "name": "Crimson + Frosty", "x": 0, "y": 0 },
+    { "id": "result-06", "name": "Frosty", "x": 0, "y": 0 },
+    { "id": "rule-07", "name": "Lemon + OG emerald", "x": 0, "y": 0 },
+    { "id": "result-07", "name": "Emerald", "x": 0, "y": 0 },
+    { "id": "rule-08", "name": "Lemon + Crimson", "x": 0, "y": 0 },
+    { "id": "result-08", "name": "Crimson", "x": 0, "y": 0 },
+    { "id": "rule-09", "name": "Lemon + Frosty", "x": 0, "y": 0 },
+    { "id": "result-09", "name": "frosty", "x": 0, "y": 0 },
+    { "id": "rule-10", "name": "Romance + Lemon", "x": 0, "y": 0 },
+    { "id": "result-10", "name": "Lemon", "x": 0, "y": 0 },
+    { "id": "rule-11", "name": "Romance + Grape", "x": 0, "y": 0 },
+    { "id": "result-11", "name": "Grape", "x": 0, "y": 0 },
+    { "id": "rule-12", "name": "Frost + Ruby", "x": 0, "y": 0 },
+    { "id": "result-12", "name": "Romance 3x rep", "x": 0, "y": 0 },
+    { "id": "rule-13", "name": "Frost + Grape", "x": 0, "y": 0 },
+    { "id": "result-13", "name": "frosty", "x": 0, "y": 0 },
+    { "id": "rule-14", "name": "Blue dream + Grape", "x": 0, "y": 0 },
+    { "id": "result-14", "name": "midnight Diesel", "x": 0, "y": 0 }
   ],
   "edges": [
-    { "from": "strain-1", "to": "strain-2" },
-    { "from": "strain-2", "to": "strain-3" }
+    { "from": "rule-01", "to": "result-01" },
+    { "from": "rule-02", "to": "result-02" },
+    { "from": "rule-03", "to": "result-03" },
+    { "from": "rule-04", "to": "result-04" },
+    { "from": "rule-05", "to": "result-05" },
+    { "from": "rule-06", "to": "result-06" },
+    { "from": "rule-07", "to": "result-07" },
+    { "from": "rule-08", "to": "result-08" },
+    { "from": "rule-09", "to": "result-09" },
+    { "from": "rule-10", "to": "result-10" },
+    { "from": "rule-11", "to": "result-11" },
+    { "from": "rule-12", "to": "result-12" },
+    { "from": "rule-13", "to": "result-13" },
+    { "from": "rule-14", "to": "result-14" }
   ]
 }
