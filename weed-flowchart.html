@@ -86,9 +86,7 @@
         element.style.top = `${node.layoutY}px`;
         const title = document.createElement('strong');
         title.textContent = node.name;
-        const type = document.createElement('small');
-        type.textContent = 'Backend managed';
-        element.append(title, type);
+        element.append(title);
         diagram.append(element);
       });
       renderConnections();
