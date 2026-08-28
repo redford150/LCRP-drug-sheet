@@ -54,7 +54,7 @@ label { display: block; color: var(--muted); font: 700 11px Arial, sans-serif; l
 input { width: 100%; margin-top: 8px; padding: 12px 13px; border: 1px solid #a8c9e1; border-radius: 5px; outline: none; color: var(--ink); background: rgba(255,255,255,.75); font: 700 22px Georgia, serif; }
 input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(18,96,154,.14); }
 .ingredients { padding: 21px 24px 25px; }
-.mushroom-tools { padding: 21px 24px 25px; border-top: 1px solid var(--line); background: rgba(212, 236, 255, .34); }
+.recipe-tools { padding: 21px 24px 25px; border-top: 1px solid var(--line); background: rgba(212, 236, 255, .34); }
 .ingredient-title { margin-bottom: 12px; color: var(--muted); font: 700 11px Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
 ul { padding: 0; margin: 0; list-style: none; }
 li { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #e4eef6; font-size: 17px; }
