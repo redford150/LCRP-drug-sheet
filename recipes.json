@@ -13,9 +13,8 @@
     "label": "Meth",
     "ingredients": [
       { "name": "Pills", "perBatch": 1 },
-      { "name": "Ammonia", "perBatch": 1 },
-      { "name": "Acetone", "perBatch": 1 },
-      { "name": "Ethanol", "perBatch": 1 },
+      { "name": "HCL (Acid)", "perBatch": 1 },
+      { "name": "Iodine", "perBatch": 1 },
       { "name": "Lithium", "perBatch": 3 }
     ]
   },
